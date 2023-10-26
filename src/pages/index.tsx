@@ -1,13 +1,9 @@
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import Head from "next/head";
-import Link from "next/link";
 
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.post.hello.useQuery({ text: "from tRPC" });
-
-  const user = useUser();
 
   return (
     <>
@@ -19,6 +15,7 @@ export default function Home() {
       <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-950 to-black">
         <div className="container flex flex-col items-center gap-12 px-4 py-16">
           <h1>Welcome</h1>
+          <p>Hello World</p>
         </div>
       </main>
     </>
