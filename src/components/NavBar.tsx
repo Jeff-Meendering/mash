@@ -1,4 +1,4 @@
-import { SignInButton, UserButton } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 
 export function NavBar() {
     return (
