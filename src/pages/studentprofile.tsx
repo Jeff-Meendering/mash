@@ -25,29 +25,29 @@ export default function Home() {
           <h1 className="text-4xl">Edit your profile</h1>
           <form className="flex flex-col gap-4">
             <div>
-              <label htmlFor="name" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+              <label htmlFor="name" className="mb-2 block text-sm font-medium text-white">
               Student Name
               </label>
-              <input id="name" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"/>
+              <input id="name" className="block w-full rounded-lg border p-2.5 text-sm  border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
             </div>
             <div>
-            <label htmlFor="aboutme" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+            <label htmlFor="aboutme" className="mb-2 block text-sm font-medium text-white">
               About Me
               </label>
-              <textarea id="aboutme" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"/>
+              <textarea id="aboutme" className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
             </div>
             <div>
-            <label htmlFor="year" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+            <label htmlFor="year" className="mb-2 block text-sm font-medium text-white">
             Year
               </label>
-              <select id="year"  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+              <select id="year" className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500">
                 <option value="1">1 - Freshman</option>
                 <option value="2">2 - Sophomore</option>
                 <option value="3">3 - Junior</option>
                 <option value="4">4 - Senior</option>
                 <option value="5">5 - Graduate Student</option>
               </select></div>
-            <button type="submit" className="mb-2 mr-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button type="submit" className="mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
               Create
             </button>
           </form>
