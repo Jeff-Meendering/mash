@@ -1,7 +1,5 @@
-import { SignOutButton, UserButton } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
-import React, { useState } from 'react'
-
 
 
 export function NavBar() {
