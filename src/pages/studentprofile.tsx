@@ -7,10 +7,10 @@
 //Edit/submit profile and delete profile buttons
 ////////////////////////////////////////////////////////////////
 
-import { UserProfile, useUser } from "@clerk/nextjs";
+//import { UserProfile, useUser } from "@clerk/nextjs";
 import Head from "next/head";
 
-import { api } from "~/utils/api";
+//import { api } from "~/utils/api";
 
 export default function Home() {
   return (
