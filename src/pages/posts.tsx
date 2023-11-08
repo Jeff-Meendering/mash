@@ -20,8 +20,8 @@ const Post: NextPage = () => {
         register,
         handleSubmit,
       } = useForm<Inputs>()
-      const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        await createPost.mutateAsync(data)
+      const onSubmit: SubmitHandler<Inputs> = (data) => {
+        createPost.mutateAsync(data)
         .then(() => {
             router.push("/")
         })
