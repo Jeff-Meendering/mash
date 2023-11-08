@@ -13,10 +13,24 @@ generator client {
 }
 
 model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
+    id        String      @id @default(cuid())
+    userId      String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
+    name    String
+    time    String
+    description String
+    message Message[]
     @@index([name])
+}
+
+model Message {
+  id        String @id @default(cuid())
+  toUser    String
+  fromUser  String
+  fromUserName String
+  toUserName String
+  postId    String
+  message   String
+  post      Post   @relation(fields: [postId], references: [id])
 }
