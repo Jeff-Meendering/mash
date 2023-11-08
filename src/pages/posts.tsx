@@ -1,14 +1,14 @@
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-import router, { useRouter } from "next/router";
-import { useForm, SubmitHandler } from "react-hook-form"
+import router from "next/router";
+import { useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
 import { api } from "~/utils/api";
+
 
 
 const Post: NextPage = () => {
     const createPost = api.post.create.useMutation();
-    const rounter = useRouter();
 
     type Inputs = {
         name: string
@@ -19,13 +19,14 @@ const Post: NextPage = () => {
     const {
         register,
         handleSubmit,
-        watch,
-        formState: { errors },
       } = useForm<Inputs>()
       const onSubmit: SubmitHandler<Inputs> = (data) => {
         createPost.mutateAsync(data)
         .then(() => {
             router.push("/")
+        })
+        .catch((error) => {
+            console.log(error)
         })
     }
     return (

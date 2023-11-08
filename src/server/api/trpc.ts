@@ -27,8 +27,6 @@ import { db } from "~/server/db";
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
 
-type CreateContextOptions = Record<string, never>;
-
 interface AuthContext {
   auth: SignedInAuthObject | SignedOutAuthObject;
 }
