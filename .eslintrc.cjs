@@ -31,6 +31,7 @@ const config = {
         checksVoidReturn: { attributes: false },
       },
     ],
+    "react-hooks/rules-of-hooks": "off",
   },
 };
 

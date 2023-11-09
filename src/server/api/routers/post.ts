@@ -16,7 +16,7 @@ export const postRouter = createTRPCRouter({
       });
   }),
   getMessage: protectedProcedure
-    .query(async ({input, ctx}) => {
+    .query(async ({ctx}) => {
       const userId = ctx.auth.userId;
       const post = await ctx.db.post.findMany({
         where: {

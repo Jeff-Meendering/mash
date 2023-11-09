@@ -1,5 +1,5 @@
-import { Post } from "@prisma/client";
-import { NextPage } from "next";
+import type { Post } from "@prisma/client";
+import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { api } from "~/utils/api";
