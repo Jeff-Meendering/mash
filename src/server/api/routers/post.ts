@@ -1,32 +1,55 @@
 import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
 
 export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
-  create: publicProcedure
-    .input(z.object({ name: z.string().min(1) }))
-    .mutation(async ({ ctx, input }) => {
-      // simulate a slow db call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      return ctx.db.post.create({
-        data: {
-          name: input.name,
+  post: publicProcedure.query(({ctx}) => {
+    return ctx.db.post.findMany();
+  }),
+  get: publicProcedure.input(
+    z.object({ postId: z.string()})
+    ).query(({ ctx, input }) => {
+      return ctx.db.post.findUnique({
+        where: {
+          id: input.postId,
         },
       });
-    }),
-
-  getLatest: publicProcedure.query(({ ctx }) => {
-    return ctx.db.post.findFirst({
-      orderBy: { createdAt: "desc" },
-    });
   }),
+  getMessage: protectedProcedure
+    .query(async ({ctx}) => {
+      const userId = ctx.auth.userId;
+      const post = await ctx.db.post.findMany({
+        where: {
+          userId,
+        },
+        include: {
+          message: true,
+        },
+      });
+      return post.flatMap((post) => post.message);
+    }),
+  sendMessage: protectedProcedure.input(
+    z.object({ message: z.string(), postId: z.string()})
+    ).mutation(async ({input, ctx}) => {
+      const message = await ctx.db.message.create({
+        data: {
+          fromUser: ctx.auth.userId,
+          fromUserName: ctx.auth.user?.username ?? "unknown",
+          message: input.message,
+          postID: input.postId,
+        },
+      });
+      return message;
+    }),
+  create: protectedProcedure.input(
+    z.object({ name: z.string(), time: z.string(), description: z.string()})
+    ).mutation(async ({input, ctx}) => {
+      const listing = await ctx.db.post.create({
+        data: {
+          ...input,
+          userId: ctx.auth.userId,
+        },
+      })
+      return listing;
+    }),
 });
