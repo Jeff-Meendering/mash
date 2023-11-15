@@ -11,28 +11,24 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-    id                Int         @id @default(autoincrement())
-    firstName         String
-    lastName          String
-    bio               String
-    createdMeetups    Meetup[]   @relation("createdMeetups")
-    futureMeetups     Meetup[]   @relation("futureMeetups")
+model Post {
+    id        String      @id @default(cuid())
+    userId      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    name    String
+    time    String
+    description String
+    message Message[]
+    @@index([name])
 }
 
-model Meetup {
-    id              Int      @id @default(autoincrement())
-    author          User     @relation("createdMeetups", fields: [authorId], references: [id])
-    authorId        Int
-    attendee        User?    @relation("futureMeetups", fields: [attendeeId], references: [id])
-    attendeeId      Int?
-    title           String
-    time            DateTime
-    description     String?
-    location        String?
-    isGroup         Boolean
-
-    @@index([authorId])
-    @@index([attendeeId])
+model Message {
+  id        String @id @default(cuid())
+  fromUser  String
+  fromUserName String
+  message   String
+  postID    String
+  post  Post  @relation(fields: [postID], references: [id])
 }
 
