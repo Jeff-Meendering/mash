@@ -1,4 +1,3 @@
-
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
@@ -17,27 +16,24 @@ export const postRouter = createTRPCRouter({
       });
   }),
   getMessage: protectedProcedure
-    .query(async ({ctx}) => {
-      const userId = ctx.auth.userId;
-      const post = await ctx.db.post.findMany({
+    .input(z.object({ postId: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const messages = await ctx.db.message.findMany({
         where: {
-          userId,
-        },
-        include: {
-          message: true,
+          postID: input.postId,
         },
       });
-      return post.flatMap((post) => post.message);
+      return messages;
     }),
   sendMessage: protectedProcedure.input(
-    z.object({ message: z.string(), postId: z.string()})
-    ).mutation(async ({input, ctx}) => {
+    z.object({ postId: z.string(), message: z.string() })
+    ).mutation(async ({ input, ctx }) => {
       const message = await ctx.db.message.create({
         data: {
-          fromUser: ctx.auth.userId,
-          fromUserName: ctx.auth.user?.username ?? "unknown",
           message: input.message,
           postID: input.postId,
+          fromUser: ctx.auth.userId,
+          fromUserName: ctx.auth.user?.username || "Unknown",
         },
       });
       return message;
