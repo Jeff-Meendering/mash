@@ -16,6 +16,7 @@ const config = {
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
 
     "@typescript-eslint/consistent-type-imports": [
       "warn",
@@ -31,6 +32,7 @@ const config = {
         checksVoidReturn: { attributes: false },
       },
     ],
+    "react-hooks/rules-of-hooks": "off",
   },
 };
 

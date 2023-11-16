@@ -2,7 +2,13 @@ import type { Post } from "@prisma/client";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useSession } from '@clerk/clerk-react';
 import { api } from "~/utils/api";
+
+
+
+
+
 
 function Card({ post } : { post : Post }) {
     return (
@@ -14,26 +20,30 @@ function Card({ post } : { post : Post }) {
     )
 }
 
+
+
 const PostListings: NextPage = () => {
-    const post = api.post.post.useQuery();
+    const { session } = useSession();
+    const postQuery = api.post.post.useQuery();
+    const userPosts = postQuery.data?.filter((post) => post.userId === session?.user?.id);
 
     return (
         <>
             <Head>
-                <title>Post List</title>
+                <title>Created Events</title>
                 <meta name="description" content="Meet and Study Here" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="flex min-h-screen flex-col gap-12 items-center bg-gradient-to-b from-slate-950 to-black">
-            <h1 className="text-4xl mt-12">Tutor Posts</h1>
+                <h1 className="text-4xl mt-12">Created Events</h1>
                 <div className="container grid grid-cols-3 items-center justify-center gap-4">
-                    {post?.data?.map((post) => (
+                    {userPosts?.map((post) => (
                         <Card key={post.id} post={post} />
                     ))}
                 </div>
             </main>
         </>
-    )
-}
+    );
+};
 
 export default PostListings;

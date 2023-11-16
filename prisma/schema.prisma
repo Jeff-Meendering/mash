@@ -26,11 +26,9 @@ model Post {
 
 model Message {
   id        String @id @default(cuid())
-  toUser    String
   fromUser  String
   fromUserName String
-  toUserName String
-  postId    String
   message   String
-  post      Post   @relation(fields: [postId], references: [id])
+  postID    String
+  post  Post  @relation(fields: [postID], references: [id])
 }
