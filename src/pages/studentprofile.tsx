@@ -1,14 +1,15 @@
 ////////////////////////////////////////////////////////////////
 //What do we want included in the profile
 //Name of the person
-//What year they are (stored as an interger 1,2,3,4,5 (5 being a grad student))
+//What year they are (stored as an integer 1,2,3,4,5 (5 being a grad student))
 //User BIO
 //Classes they have and are signed up for
 //Edit/submit profile and delete profile buttons
-////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 
 //import { UserProfile, useUser } from "@clerk/nextjs";
 import Head from "next/head";
+import Link from "next/link";
 
 //import { api } from "~/utils/api";
 
@@ -50,6 +51,12 @@ export default function Home() {
             <button type="submit" className="mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
               Create
             </button>
+            {/* Navigate to Created Events button */}
+            <Link href="/createdevents" passHref>
+              <button type="button" className="rounded-lg px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-800">
+                Go to Created Events
+              </button>
+            </Link>
           </form>
         </div>
       </main>
