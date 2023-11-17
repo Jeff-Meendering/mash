@@ -1,3 +1,5 @@
+
+
 ////////////////////////////////////////////////////////////////
 //What do we want included in the profile
 //Name of the person
@@ -27,7 +29,7 @@ export default function Home() {
           <form className="flex flex-col gap-4">
             <div>
               <label htmlFor="name" className="mb-2 block text-sm font-medium text-white">
-              Student Name
+              Name
               </label>
               <input id="name" className="block w-full rounded-lg border p-2.5 text-sm  border-gray-600 bg-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
             </div>
@@ -63,8 +65,8 @@ export default function Home() {
             </button>
             {/* Navigate to Created Events button */}
             <Link href="/createdevents" passHref>
-              <button type="button" className="rounded-lg px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-800">
-                Go to Created Events
+              <button type="button" className="mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-green-600 hover:bg-green-700 focus:ring-blue-800 container flex flex-col gap-12 px-4 py-16">
+                Go to Created Meetups
               </button>
             </Link>
           </form>

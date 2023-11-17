@@ -32,31 +32,31 @@ const Post: NextPage = () => {
     return (
         <div className="home-page">
         <Head>
-            <title>Posts</title>
+            <title>Meetups</title>
             <meta name="description" content="Meet and Study Here" />
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-950 to-black">
             <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-                <h1>Posts</h1>
+                <h1>Meetup</h1>
                 <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
 
                     <div>
-                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">class name</label>
+                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Name</label>
                         <input id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("name", { required: true })}/>
                     </div>
 
                     <br />
 
                     <div>
-                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">time</label>
+                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</label>
                         <input id="time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("time", { required: true })}/>
                     </div>
 
                     <br />
 
                     <div>
-                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">description</label>
+                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                         <textarea id="description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("description", { required: true })}/>
                     </div>
 
