@@ -1,3 +1,5 @@
+
+
 ////////////////////////////////////////////////////////////////
 //What do we want included in the profile
 //Name of the person
@@ -27,21 +29,31 @@ export default function Home() {
           <form className="flex flex-col gap-4">
             <div>
               <label htmlFor="name" className="mb-2 block text-sm font-medium text-white">
-              Student Name
+              Name
               </label>
-              <input id="name" className="block w-full rounded-lg border p-2.5 text-sm  border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
+              <input id="name" className="block w-full rounded-lg border p-2.5 text-sm  border-gray-600 bg-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
             </div>
             <div>
             <label htmlFor="aboutme" className="mb-2 block text-sm font-medium text-white">
               About Me
               </label>
+              <textarea id="aboutme" className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
+            </div>
+            <div>
+            <label htmlFor="aboutme" className="mb-2 block text-sm font-medium text-white">
+              Degrees/Certifications
+              </label>
               <textarea id="aboutme" className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
+            </div>
+            <div>
+              <label htmlFor="Subject" className="mb-2 block text-sm font-medium text-white"> Subjects </label>
+              <textarea id="aboutme" className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
             </div>
             <div>
             <label htmlFor="year" className="mb-2 block text-sm font-medium text-white">
             Year
               </label>
-              <select id="year" className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500">
+              <select id="year" className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-600 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500">
                 <option value="1">1 - Freshman</option>
                 <option value="2">2 - Sophomore</option>
                 <option value="3">3 - Junior</option>
@@ -49,16 +61,22 @@ export default function Home() {
                 <option value="5">5 - Graduate Student</option>
               </select></div>
             <button type="submit" className="mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
-              Create
+              Save Changes
             </button>
             {/* Navigate to Created Events button */}
             <Link href="/createdevents" passHref>
-              <button type="button" className="rounded-lg px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-800">
-                Go to Created Events
+              <button type="button" className="mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-green-600 hover:bg-green-700 focus:ring-blue-800 container flex flex-col gap-12 px-4 py-16">
+                Go to Created Meetups
               </button>
             </Link>
           </form>
+          <button type="submit" className="mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-green-600 hover:bg-green-700 focus:ring-blue-800">
+              Request Subject
+            </button>
         </div>
+        <button className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-800">
+              Delete Account
+            </button>
       </main>
     </>
   );
