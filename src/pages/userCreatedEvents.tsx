@@ -24,6 +24,7 @@ function Card({ post } : { post : Post }) {
 
 const PostListings: NextPage = () => {
     const { session } = useSession();
+    const userName = session?.user?.firstName;
     const postQuery = api.post.post.useQuery();
     const userPosts = postQuery.data?.filter((post) => post.userId === session?.user?.id);
 
