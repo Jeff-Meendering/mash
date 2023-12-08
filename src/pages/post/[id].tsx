@@ -1,55 +1,66 @@
+import { useUser } from "@clerk/nextjs";
+import type { NextPage } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { api } from "~/utils/api";
 import { useSession } from '@clerk/clerk-react';
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { api } from '~/utils/api';
 
-type FormData = {
-  message: string;
-};
+
+
 
 const postView: NextPage = () => {
-  const { register, handleSubmit, reset } = useForm<FormData>();
-  const router = useRouter();
-  const { session } = useSession();
+    const {
+        register,
+        handleSubmit,
+        reset,
+      } = useForm<{message: string}>()
 
-  const post = api.post.get.useQuery(
-    {
-      postId: router.query.id as string,
-    },
-    {
-      enabled: !!router.query.id,
-    }
-  );
-
-  const sendMessage = api.post.sendMessage.useMutation();
-
-  const messageQuery = api.post.getMessage.useQuery(
-    {
-      postId: router.query.id as string,
-    },
-    {
-      enabled: !!router.query.id,
-    }
-  );
-
-  const postItem = post.data;
-
-  if (!postItem) {
-    return null;
-  }
-
-  const onSubmit = (formData: FormData) => {
-    // Just send the message without the user's name
-    sendMessage.mutateAsync({
-      message: formData.message,
-      postId: postItem.id,
-    }).then(() => {
-      reset();
-      messageQuery.refetch();
+    const router = useRouter();
+    router.query.id;
+    const post = api.post.get.useQuery({
+        postId: router.query.id as string,
+    }, {
+        enabled: !!router.query.id,
     });
-  };
+
+    const user = useUser();
+
+    const sendMessage = api.post.sendMessage.useMutation();
+
+    const message = api.post.getMessage.useQuery({
+        postId: router.query.id as string,
+    }, {
+        enabled: !!router.query.id,
+    });
+
+    const messageQuery = api.post.getMessage.useQuery({
+        postId: router.query.id as string,
+    }, {
+        enabled: !!router.query.id,
+    });
+
+    const { session } = useSession();
+    const userName = `${session?.user?.firstName} ${session?.user?.lastName}`;
+    
+
+    const postItem = post.data;
+
+    if (!postItem) {
+        return null;
+    }
+
+    const onSubmit = (formData: { message: string; }) => {
+        const userName = session ? `${session.user.firstName} ${session.user.lastName}`.trim() : 'Anonymous';
+        sendMessage.mutateAsync({
+          message: formData.message,
+          postId: postItem.id,
+          
+        }).then(() => {
+          reset();
+          messageQuery.refetch();
+        });
+      };
 
     return (
         <>
@@ -87,11 +98,10 @@ const postView: NextPage = () => {
             </div>
             <div className="container mx-auto">
                 <h1 className="text-4xl mt-12">Messages</h1>
-                { message.data?.map((message) => (
-                    <div key={message.id} className="flex flex-col gap-2">
-                        <p>{message.fromUser}</p>
-                        <p>{message.message}</p>
-                    </div>
+                {messageQuery.data?.map((message) => (
+            <div key={message.id} className="flex flex-col gap-2">
+              <p>{message.fromUserName}: {message.message}</p> {/* Now using fromUserName */}
+            </div>
                 
                     
                 ))}
