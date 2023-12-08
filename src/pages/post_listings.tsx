@@ -24,8 +24,8 @@ const PostListings: NextPage = () => {
                 <meta name="description" content="Meet and Study Here" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className="flex min-h-screen flex-col gap-12 items-center bg-gradient-to-b from-slate-950 to-black">
-            <h1 className="text-4xl mt-12">Tutor Posts</h1>
+            <main className="flex min-h-screen flex-col gap-12 items-center bg-neutral-200">
+            <h1 className="text-4xl mt-12 text-black">Tutor Posts</h1>
                 <div className="container grid grid-cols-3 items-center justify-center gap-4">
                     {post?.data?.map((post) => (
                         <Card key={post.id} post={post} />
