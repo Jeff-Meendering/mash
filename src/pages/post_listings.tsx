@@ -58,7 +58,29 @@ const PostListings: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="flex min-h-screen flex-col gap-12 items-center bg-gradient-to-b from-slate-950 to-black">
-            <h1 className="text-4xl mt-12">Tutor Meetups</h1>
+                <h1 className="text-4xl mt-12">Tutor Meetups</h1>
+                <div>
+                    <label htmlFor="prefix">Class Prefix    </label>
+                    <select id="prefix" onChange={(e) => setSelectedPrefix(e.target.value)}>
+                        <option value="">Select a Prefix</option>
+                        {prefixes.map((prefix) => (
+                            <option key={prefix} value={prefix}>{prefix}</option>
+                        ))}
+                    </select>
+                </div>
+
+                {selectedPrefix && (
+                    <div>
+                        <label htmlFor="code">Class Code    </label>
+                        <select id="code" onChange={(e) => setSelectedCode(e.target.value)}>
+                            <option value="">Select a Code</option>
+                            {codes.map((code) => (
+                                <option key={code} value={code}>{code}</option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+
                 <div className="container grid grid-cols-3 items-center justify-center gap-4">
                     {filteredPosts.map((post) => (
                         <Card key={post.id} post={post} />

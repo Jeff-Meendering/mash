@@ -57,34 +57,57 @@ const Post: NextPage = () => {
 
     return (
         <div className="home-page">
-        <Head>
-            <title>Meetups</title>
-            <meta name="description" content="Meet and Study Here" />
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-950 to-black">
-            <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-                <h1>Meetup</h1>
-                <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
-
+            <Head>
+                <title>Create Meetup</title>
+                <meta name="description" content="Create a meetup" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-950 to-black">
+                <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
+                    <h1>Create a Meetup</h1>
+                    <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
                     <div>
-                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Name</label>
-                        <input id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("name", { required: true })}/>
-                    </div>
+                            <label htmlFor="prefix" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Prefix</label>
+                            <select id="prefix" onChange={(e) => setSelectedPrefix(e.target.value)}>
+                                <option value="">Select a Prefix</option>
+                                {prefixes.map((prefix) => (
+                                    <option key={prefix} value={prefix}>{prefix}</option>
+                                ))}
+                            </select>
+                        </div>
 
-                    <br />
+                        {selectedPrefix && (
+                            <div>
+                                <label htmlFor="code" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Code</label>
+                                <select id="code" onChange={(e) => setSelectedCode(e.target.value)}>
+                                    <option value="">Select a Code</option>
+                                    {codes.map((code) => (
+                                        <option key={code} value={code}>{code}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
 
-                    <div>
-                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</label>
-                        <input id="time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("time", { required: true })}/>
-                    </div>
+                        {/* Add a hidden input to store the className*/}
+                        <input type="hidden" {...register('name')} />
 
-                    <br />
+                        {/* Time Input */}
+                        <div>
+                            <label htmlFor="time" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</label>
+                            <input id="time" {...register("time", { required: true })} className="input-field" />
+                        </div>
 
-                    <div>
-                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <textarea id="description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("description", { required: true })}/>
-                    </div>
+                        {/* Location Input */}
+                        <div>
+                            <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                            <input id="location" {...register("location", { required: true })} className="input-field" />
+                        </div>
+
+                        {/* Description Input */}
+                        <div>
+                            <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                            <textarea id="description" {...register("description", { required: true })} className="input-field" />
+                        </div>
 
                         {/* Submit Button */}
                         <button type="submit" className="submit-button">Create</button>
