@@ -41,4 +41,3 @@ model Profile {
   year        String
   @@index([name])
 }
-
