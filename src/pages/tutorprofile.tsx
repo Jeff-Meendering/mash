@@ -1,14 +1,15 @@
 ////////////////////////////////////////////////////////////////
 //What do we want included in the profile
 //Name of the person
-//What year they are (stored as an interger 1,2,3,4,5 (5 being a grad student))
+//What year they are (stored as an integer 1,2,3,4,5 (5 being a grad student))
 //User BIO
 //Classes they have and are signed up for
 //Edit/submit profile and delete profile buttons
-////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 
 //import { UserProfile, useUser } from "@clerk/nextjs";
 import Head from "next/head";
+import Link from "next/link";
 
 //import { api } from "~/utils/api";
 
@@ -26,9 +27,9 @@ export default function Home() {
           <form className="flex flex-col gap-4">
             <div>
               <label htmlFor="name" className="mb-2 block text-sm font-medium text-white">
-              Tutor Name
+              Name
               </label>
-              <input id="name" className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
+              <input id="name" className="block w-full rounded-lg border p-2.5 text-sm  border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"/>
             </div>
             <div>
             <label htmlFor="aboutme" className="mb-2 block text-sm font-medium text-white">
@@ -38,9 +39,9 @@ export default function Home() {
             </div>
             <div>
             <label htmlFor="year" className="mb-2 block text-sm font-medium text-white">
-                Year
+            Year
               </label>
-              <select id="year"  className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500">
+              <select id="year" className="block w-full rounded-lg border p-2.5 text-sm border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500">
                 <option value="1">1 - Freshman</option>
                 <option value="2">2 - Sophomore</option>
                 <option value="3">3 - Junior</option>
@@ -50,6 +51,12 @@ export default function Home() {
             <button type="submit" className="mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
               Create
             </button>
+            {/* Navigate to Created Events button */}
+            <Link href="/createdevents" passHref>
+              <button type="button" className="mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-green-600 hover:bg-green-700 focus:ring-blue-800 container flex flex-col gap-12 px-4 py-16">
+                Go to Created Meetups
+              </button>
+            </Link>
           </form>
         </div>
       </main>

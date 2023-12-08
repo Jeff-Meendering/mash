@@ -20,7 +20,7 @@ const PostListings: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Post List</title>
+                <title>Meetup List</title>
                 <meta name="description" content="Meet and Study Here" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>

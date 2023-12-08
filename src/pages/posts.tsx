@@ -32,7 +32,7 @@ const Post: NextPage = () => {
     return (
         <div className="home-page">
         <Head>
-            <title className="text-2xl" >Posts</title>
+            <title className="text-4xl" >Posts</title>
             <meta name="description" content="Meet and Study Here" />
             <link rel="icon" href="/favicon.ico" />
         </Head>

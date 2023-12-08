@@ -1,3 +1,5 @@
+
+
 ////////////////////////////////////////////////////////////////
 //What do we want included in the profile
 //Name of the person
@@ -69,12 +71,12 @@ export default function Home() {
             </button>
             {/* Navigate to Created Events button */}
             <Link href="/createdevents" passHref>
-              <button type="button" className="rounded-lg px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-800">
-                Go to Created Events
+            <button type="submit" className="mb-2 mr-2 rounded-lg px-12 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-green-600 hover:bg-green-700 focus:ring-blue-800">
+                Go to Created Meetups
               </button>
             </Link>
           </form>
-          <button type="submit" className="mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-medium focus:outline-none focus:ring-4 bg-green-600 hover:bg-green-700 focus:ring-blue-800">
+          <button type="submit" className="mb-2 mr-2 rounded-lg px-5 py-2.5  text-sm font-medium focus:outline-none focus:ring-4 bg-green-600 hover:bg-green-700 focus:ring-blue-800">
               Request Subject
             </button>
         </div>
