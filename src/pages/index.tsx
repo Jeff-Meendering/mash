@@ -1,8 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import calendar from "~/components/calendar";
-import {PaperClipIcon} from '@heroicons/react/20/solid';
-
 
 export default function Home() {
 
