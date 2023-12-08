@@ -2,7 +2,6 @@ import Head from "next/head";
 import Link from "next/link";
 import calendar from "~/components/calendar";
 
-
 export default function Home() {
 
   return (
@@ -13,11 +12,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen items-center justify-center bg-neutral-200">
-        <h1 className="text-slate-950  align-items: self-baseline" >Welcome to MASH</h1>
-          <div>
-            
-          </div>
+        
+        <h1 className="text-slate-950 " >Welcome to MASH</h1>
+      <div >
+      
 
+            
+
+      </div>
+
+        
+
+          
       </main>
     </div>
   );
