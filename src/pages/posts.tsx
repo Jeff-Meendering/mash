@@ -4,70 +4,118 @@ import router from "next/router";
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 import { api } from "~/utils/api";
-
-
+import React, { useState, useEffect } from 'react';
+import classListData from './classList.json';
 
 const Post: NextPage = () => {
     const createPost = api.post.create.useMutation();
+    const [prefixes, setPrefixes] = useState<string[]>([]);
+    const [selectedPrefix, setSelectedPrefix] = useState<string>('');
+    const [codes, setCodes] = useState<string[]>([]);
+    const [selectedCode, setSelectedCode] = useState<string>('');
+
+    useEffect(() => {
+        const uniquePrefixes = [...new Set(classListData.map(item => item.Prefix))];
+        setPrefixes(uniquePrefixes);
+    }, []);
+
+    useEffect(() => {
+        if (selectedPrefix) {
+            const codesForPrefix = classListData
+                .filter(item => item.Prefix === selectedPrefix)
+                .map(item => item.Code.toString());
+            setCodes(codesForPrefix);
+        } else {
+            setCodes([]);
+        }
+    }, [selectedPrefix]);
 
     type Inputs = {
-        name: string
-        time: string
-        description: string
-      }
+        name: string;
+        time: string;
+        location: string;
+        description: string;
+    };
 
-    const {
-        register,
-        handleSubmit,
-      } = useForm<Inputs>()
-      const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const { register, handleSubmit, setValue } = useForm<Inputs>();
+
+    useEffect(() => {
+        const className = selectedPrefix && selectedCode ? `${selectedPrefix}-${selectedCode}` : '';
+        setValue('name', className); // Setting the concatenated class name as the 'name' field
+    }, [selectedPrefix, selectedCode, setValue]);
+
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        console.log("Form Data:", data);
         createPost.mutateAsync(data)
-        .then(() => {
-            router.push("/")
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    }
+            .then(() => {
+                router.push("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <div className="home-page">
-        <Head>
-            <title className="text-4xl" >Posts</title>
-            <meta name="description" content="Meet and Study Here" />
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <main className="flex min-h-screen items-center justify-center bg-neutral-200">
-            <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 text-black">
-                <h1>Posts</h1>
-                <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
-
+            <Head>
+                <title>Create Meetup</title>
+                <meta name="description" content="Create a meetup" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-950 to-black">
+                <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
+                    <h1>Create a Meetup</h1>
+                    <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
                     <div>
-                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Class Name</label>
-                        <input id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("name", { required: true })}/>
-                    </div>
+                            <label htmlFor="prefix" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Prefix</label>
+                            <select id="prefix" onChange={(e) => setSelectedPrefix(e.target.value)}>
+                                <option value="">Select a Prefix</option>
+                                {prefixes.map((prefix) => (
+                                    <option key={prefix} value={prefix}>{prefix}</option>
+                                ))}
+                            </select>
+                        </div>
 
-                    <br />
+                        {selectedPrefix && (
+                            <div>
+                                <label htmlFor="code" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class Code</label>
+                                <select id="code" onChange={(e) => setSelectedCode(e.target.value)}>
+                                    <option value="">Select a Code</option>
+                                    {codes.map((code) => (
+                                        <option key={code} value={code}>{code}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
 
-                    <div>
-                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Time</label>
-                        <input id="time" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("time", { required: true })}/>
-                    </div>
+                        {/* Add a hidden input to store the className*/}
+                        <input type="hidden" {...register('name')} />
 
-                    <br />
+                        {/* Time Input */}
+                        <div>
+                            <label htmlFor="time" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</label>
+                            <input id="time" {...register("time", { required: true })} className="input-field" />
+                        </div>
 
-                    <div>
-                        <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Description</label>
-                        <textarea id="description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("description", { required: true })}/>
-                    </div>
+                        {/* Location Input */}
+                        <div>
+                            <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                            <input id="location" {...register("location", { required: true })} className="input-field" />
+                        </div>
 
-                    <br />
+                        {/* Description Input */}
+                        <div>
+                            <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                            <textarea id="description" {...register("description", { required: true })} className="input-field" />
+                        </div>
 
-                    <button type="submit" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Create</button>
-                </form>
-            </div>
-        </main>
+                        {/* Submit Button */}
+                        <button type="submit" className="submit-button">Create</button>
+                    </form>
+                </div>
+            </main>
         </div>
-  );
-}
+    );
+};
 
 export default Post;
