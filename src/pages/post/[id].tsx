@@ -48,7 +48,7 @@ const postView: NextPage = () => {
             script.async = true;
             script.onload = () => {
                 new jitsiWindow.JitsiMeetExternalAPI('meet.jit.si', {
-                    roomName: postItem.name || undefined,
+                    roomName: roomName: postItem ? postItem.name : undefined,
                     parentNode: jitsiWindow.document.getElementById('jitsi-container'),
                     width: '100%',
                     height: '100%',
